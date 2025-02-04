@@ -222,8 +222,16 @@ hr {
     white-space: nowrap;
     margin: 0 auto;
     letter-spacing: .15em;
-    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+    display: inline-block;
+    position: relative;
+    /* Importante: adicione animation-fill-mode para manter o estado final */
+    animation: typing 2.5s steps(31, end) forwards, blink-caret 0.75s step-end infinite;
 }
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 35ch; }
+  }
 
 .intro h5 {
     color: #1abc9c;
@@ -431,11 +439,6 @@ footer p {
     }
 }
 
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-}
-
 @keyframes blink-caret {
 
     from,
@@ -500,18 +503,6 @@ footer p {
 
     }
 
-    .intro h1 {
-        font-size: 4rem;
-        overflow: hidden;
-        border-right: 2px solid #1abc9c;
-        white-space: nowrap;
-        margin: 0 auto;
-        letter-spacing: .15em;
-        display: inline-block; /* Alterado de block para inline-block */
-        position: relative;
-        animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-    }
-
     .h1-container {
         display: block;
         width: fit-content;
@@ -566,11 +557,6 @@ footer p {
         content: "|";
         animation: blink-caret 0.75s step-end infinite;
         color: #1abc9c;
-    }
-    
-    @keyframes typing {
-        from { width: 0 }
-        to { width: 100% }
     }
 }
 

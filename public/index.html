@@ -1,205 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Principal</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/8.5.3/video-js.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            padding-top: 45px;
-            background: #0a0a0a;
-        }
-
-        /* Menu Aprimorado */
-        nav {
-            background: rgba(10, 10, 10, 0.95);
-            padding: 0.5rem 1rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 4px 30px rgba(0,0,0,0.2);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px; /* Borda arredondada opcional */
-
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: center;
-            gap: 3.5rem;
-        }
-
-        .nav-link {
-            color: rgba(255,255,255,0.9);
-            text-decoration: none;
-            padding: 0.8rem 1.5rem;
-            position: relative;
-            font-weight: 500;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            font-size: 1.1rem;
-            letter-spacing: 0.5px;
-            border-radius: 8px;
-        }
-
-        .nav-link span {
-            position: relative;
-            z-index: 1;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #1abc9c 0%, #16a085 100%);
-            z-index: 0;
-            border-radius: 6px;
-            transform: scaleY(0);
-            transform-origin: bottom;
-            transition: transform 0.3s ease;
-        }
-
-        .nav-link:hover::before {
-            transform: scaleY(1);
-        }
-
-        .nav-link:hover span {
-            color: #fff;
-        }
-
-        .nav-link:hover {
-            transform: translateY(-2px);
-        }
-
-        /* Restante do CSS mantido */
-        #content-frame {
-            display: none;
-            width: 100%;
-            height: calc(100vh - 75px);
-            border: none;
-        }
-
-        .video-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #0a0a0a;
-        }
-
-        #jump-button {
-            background: linear-gradient(45deg, #1abc9c, #16a085);
-            margin-top: 15px;
-            padding: 12px 25px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        @media (max-width: 768px) {
-            .nav-container {
-                gap: 1.5rem;
-                flex-wrap: wrap;
-            }
-            
-            .nav-link {
-                font-size: 1rem;
-                padding: 0.6rem 1rem;
-            }
-            
-            body {
-                padding-top: 65px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Principal</title>
+  
+  <!-- Estilos externos -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/index.css">
+  
+  <!-- CSS adicional para o vídeo centralizado -->
+  <style>
+    /* Caso não queira alterar o arquivo index.css, adicione aqui as regras específicas do vídeo */
+    .video-container {
+      display: none; /* Oculto inicialmente; será exibido ao clicar no menu "Vídeo" */
+      padding: 20px;
+      background-color: #0a0a0a;
+      justify-content: center;
+      align-items: center;
+    }
+    .video-wrapper {
+      position: relative;
+      width: 560px;
+      max-width: 100%;
+      height: 315px;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <a href="#" onclick="loadHome()" class="nav-link"><span>Início</span></a>
-            <a href="#" onclick="loadGame()" class="nav-link"><span>Jogo</span></a>
-            <a href="#" onclick="loadVideo()" class="nav-link"><span>Vídeo</span></a>
-        </div>
-    </nav>
-
-    <iframe id="content-frame" src=""></iframe>
-    
-    <div id="video-container" class="video-container" style="display: none; flex-direction: column;">
-        <video-js id="my-video" class="video-js vjs-big-play-centered">
-            <source src="completo.webm" type="video/webm">
-        </video-js>
-        <button id="jump-button" onclick="jumpToTime(308)">Oh mano</button>
+  <nav>
+    <div class="nav-container">
+      <a href="#" id="nav-home" class="nav-link"><span>Início</span></a>
+      <a href="#" id="nav-game" class="nav-link"><span>Jogo</span></a>
+      <a href="#" id="nav-video" class="nav-link"><span>Vídeo</span></a>
     </div>
+  </nav>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/8.5.3/video.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        let player = null;
-        AOS.init({
-            duration: 1000,
-            once: true
-        });
+  <!-- Iframe para carregar páginas "Início" e "Jogo" -->
+  <iframe id="content-frame" src="" style="display: none; width: 100%; height: calc(100vh - 75px); border: none;"></iframe>
 
-        function loadHome() {
-            document.getElementById('content-frame').style.display = 'block';
-            document.getElementById('video-container').style.display = 'none';
-            document.getElementById('content-frame').src = 'home.html';
-            if (player) {
-                player.pause();
-            }
-        }
+  <!-- Container do vídeo do YouTube (apenas exibido ao clicar no menu "Vídeo") -->
+  <div id="video-container" class="video-container">
+    <div class="video-wrapper">
+      <!-- Vídeo de exemplo: Rick Astley - Never Gonna Give You Up -->
+      <iframe 
+        src="https://www.youtube.com/embed/FOVNdL0Hpmc" 
+        title="YouTube video player" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
 
-        function loadGame() {
-            document.getElementById('content-frame').style.display = 'block';
-            document.getElementById('video-container').style.display = 'none';
-            document.getElementById('content-frame').src = 'jogo.html';
-            if (player) {
-                player.pause();
-            }
-        }
-
-        function loadVideo() {
-            document.getElementById('content-frame').style.display = 'none';
-            document.getElementById('video-container').style.display = 'flex';
-            
-            if (!player) {
-                player = videojs('my-video', {
-                    controls: true,
-                    autoplay: true,
-                    preload: 'auto',
-                    responsive: true,
-                    fluid: true
-                });
-            } else {
-                player.play();
-            }
-        }
-
-        function jumpToTime(seconds) {
-            if (player) {
-                player.currentTime(seconds);
-                player.play();
-            }
-        }
-
-        loadHome();
-    </script>
+  <!-- Scripts externos -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+  <script src="js/index.js" defer></script>
 </body>
 </html>
