@@ -10,57 +10,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/index.css">
   
-  <!-- CSS adicional para o vídeo centralizado -->
-  <style>
-    /* Caso não queira alterar o arquivo index.css, adicione aqui as regras específicas do vídeo */
-    .video-container {
-      display: none; /* Oculto inicialmente; será exibido ao clicar no menu "Vídeo" */
-      padding: 20px;
-      background-color: #0a0a0a;
-      justify-content: center;
-      align-items: center;
-    }
-    .video-wrapper {
-      position: relative;
-      width: 560px;
-      max-width: 100%;
-      height: 315px;
-    }
-    .video-wrapper iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 8px;
-    }
-  </style>
 </head> 
 <body>
   <nav>
     <div class="nav-container">
       <a href="#" id="nav-home" class="nav-link"><span>Início</span></a>
-      <a href="#" id="nav-game" class="nav-link"><span>Jogo</span></a>
-      <a href="#" id="nav-video" class="nav-link"><span>Vídeo</span></a>
     </div>
   </nav>
 
   <!-- Iframe para carregar páginas "Início" e "Jogo" -->
-  <iframe id="content-frame" src="." style="display: none; width: 100%; height: calc(100vh - 75px); border: none;"></iframe>
-
-  <!-- Container do vídeo do YouTube (apenas exibido ao clicar no menu "Vídeo") -->
-  <div id="video-container" class="video-container">
-    <div class="video-wrapper">
-      <!-- Vídeo de exemplo: Rick Astley - Never Gonna Give You Up -->
-      <iframe 
-        src="https://www.youtube.com/embed/FOVNdL0Hpmc" 
-        title="YouTube video player" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-      </iframe>
-    </div>
-  </div>
+  <iframe id="content-frame" src="home.html" style="display: none; width: 100%; height: calc(100vh - 75px); border: none;"></iframe>
 
   <!-- Scripts externos -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
